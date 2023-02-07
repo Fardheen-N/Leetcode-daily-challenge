@@ -1,0 +1,32 @@
+class Solution {
+public:
+    int totalFruit(vector<int>& fruits) {
+        map<int,int> bucket;
+        int max=0;
+        int l=0,r=1;
+        bucket[fruits[0]]=1;
+        while(r<fruits.size())
+        {
+            if(bucket.size()<2||bucket[fruits[r]]!=0)
+            {
+                bucket[fruits[r]]++;
+                r++;
+            }
+            else if(bucket[fruits[r]]==0)
+            {
+                if(r-l>max) max=r-l;
+                if(--bucket[fruits[l]]==0)
+                {
+                    bucket.erase(fruits[l++]);
+                    bucket[fruits[r]]++;
+                    r++;
+                }
+                else
+                {
+                    l++;
+                }
+            }
+        }
+        return max>r-l?max:r-l;
+    }
+};
