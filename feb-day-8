@@ -5,7 +5,7 @@ public:
         for(int i=0;i<nums.size()-1;i++)
         { 
             cur=max(cur,i+nums[i]);
-            if(i==move)
+            if(i==move)          // greedy algo
             {
                 move=cur;
                 res++;
