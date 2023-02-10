@@ -1,0 +1,35 @@
+class Solution {
+    int [][] mat = new int[][]{{-1,0},{1,0},{0,-1},{0,1}};
+    public int maxDistance(int[][] grid) {
+        int [][]visited = new int [grid.length][grid[0].length];
+        Queue<Pair<Integer,Integer>> q = new LinkedList<>();
+        for(int i=0;i<grid.length;i++)
+        {
+            for(int j=0;j<grid[i].length;j++)
+            {
+                if(grid[i][j]==1) q.offer(new Pair(i,j));
+                visited[i][j]=grid[i][j];
+            }
+        }
+        int res=-1;
+        while(!q.isEmpty())
+        {
+            int size = q.size();
+            while(size-- >0)
+            {   Pair <Integer,Integer> p = q.poll();
+                for(int i[]:mat)
+                {  
+                    int in = p.getKey()+i[0];
+                    int jn = p.getValue()+i[1];
+                    if(in>=0&&jn>=0&&jn<visited[0].length&&in<visited.length&&visited[in][jn]==0)
+                    {
+                      visited[in][jn]=1;
+                      q.offer(new Pair(in,jn));
+                    }
+                }
+            }
+            res++;
+        }
+        return res==0?-1:res;
+    }
+}
